@@ -5,6 +5,28 @@ import banking.*;
 import java.util.*;
 public class BarodaMain extends BankMain {
 
+	static BarodaBank currentBarodaAcc;
+	static HashMap<String, BarodaBank> barodaAccounts;
+	
+	static {
+		currentBarodaAcc = null;
+	}
+
+
+	public static void setMenu() {
+		menuWidth = 20 + 11; title = "Baroda Bank";
+		menu.clear();
+		menu.add("Quit Baroda-Bank");
+		menu.add("Create an Account");
+		menu.add("Delete an Account");
+		menu.add("Switch an Account");
+		menu.add("Find Loan-Interest");
+		menu.add("Find Amount-Balance");
+		menu.add("Find Amount-Deposit");
+		menu.add("Find Amount-Withdraw");
+	}
+
+
 	public static void run() {
 		BarodaRun();
 	}
@@ -12,8 +34,7 @@ public class BarodaMain extends BankMain {
 
 	public static void BarodaRun() {
 
-		currentAcc = null;
-		LinkedList<Bank> barodaAcc = accounts.get("axis");
+		currentBarodaAcc = null;
 		while (true) {
 
 			try {
@@ -29,31 +50,31 @@ public class BarodaMain extends BankMain {
 				switch (getChoice) {
 
 					case 1 :
-						BarodaBank.createAccount(barodaAcc);
+						BarodaBank.createAccount(barodaAccounts);
 						break;
 	
 					case 2 :
-						BarodaBank.deleteAccount(barodaAcc);
+						BarodaBank.deleteAccount(barodaAccounts);
 						break;
 
 					case 3 :
-						BarodaBank.switchAccount(barodaAcc);
+						BarodaBank.switchAccount(barodaAccounts);
 						break;
 
 					case 4 :
-						BarodaBank.loanInterest(currentAcc);
+						BarodaBank.loanInterest(currentBarodaAcc);
 						break;
 
 					case 5 :
-						BarodaBank.amountBalance(currentAcc);
+						BarodaBank.amountBalance(currentBarodaAcc);
 						break;
 	
 					case 6 :
-						BarodaBank.amountDeposit(currentAcc);
+						BarodaBank.amountDeposit(currentBarodaAcc);
 						break;
 
 					case 7 :
-						BarodaBank.amountWithdraw(currentAcc);
+						BarodaBank.amountWithdraw(currentBarodaAcc);
 						break;
 
 					case 0 :

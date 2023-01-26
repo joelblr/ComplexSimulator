@@ -6,15 +6,15 @@ import java.util.*;
 public class BarodaBank implements Bank {
 
 
-	public static void createAccount(LinkedList<Bank> accList) {
+	public static void createAccount(HashMap<String, BarodaBank> accList) {
 		
 
 	}
-	public static void deleteAccount(LinkedList<Bank> accList) throws IllegalAccessException {
+	public static void deleteAccount(HashMap<String, BarodaBank> accList) throws IllegalAccessException {
 		
 
 	}
-	public static void switchAccount(LinkedList<Bank> accList) throws IllegalAccessException {
+	public static void switchAccount(HashMap<String, BarodaBank> accList) throws IllegalAccessException {
 		
 
 	}
