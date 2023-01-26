@@ -4,7 +4,12 @@ import banking.*;
 import java.util.*;
 public class AxisMain extends BankMain {
 
+	//to keep track of present user.
 	static AxisBank currentAxisAcc;
+
+	/*key : value pairs,
+		"accpunt name" : AxisBank instance
+	*/
 	static HashMap<String, AxisBank> axisAccounts;
 
 	static {
