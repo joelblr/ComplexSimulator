@@ -14,23 +14,24 @@ public class BankMain extends SuperMain {
 				 "baroda" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
 				}
 	 */
-	public static HashMap<String, LinkedList<Bank>> accounts;
-	public static Bank currentAcc;
+//	public static HashMap<String, HashMap> accounts;
+//	public static Bank currentAcc;
 
-	static {
-		currentAcc = null;
-		accounts = new HashMap<String, LinkedList<Bank>>();
-	}
+//	static {
+//		currentAcc = null;
+//		accounts = new HashMap<String, HashMap>();
+//	}
 
 	public static void setMenu() {
-		menuWidth = 26 + 11; title = "Banks of India";
+		menuWidth = 13 + 11; title = "Banks of India";
 		menu.clear();
 //		menu.add("Clear Screen");
+		menu.add("Close Banking");
 		menu.add("Axis Bank");
 		menu.add("IDBI Bank");
 		menu.add("Canara Bank");
 		menu.add("Baroda Bank");
-		menu.add("Close Banking");
+//		menu.add("Close Banking");
 	}
 
 
@@ -71,14 +72,14 @@ public class BankMain extends SuperMain {
 						BarodaMain.run();
 						break;
 
-					case 5 :
+					case 0 :
 						return;
 
 					default :
 						errorMsg = "<INVALID CHOICE!>";  errorFlag = true;
 						throw new NumberFormatException();
 
-				}continueProcess();
+				}//continueProcess();
 
 			}catch (InputMismatchException | NumberFormatException e) {
 				errorMsg = "<INVALID INPUT!>";	errorFlag = true;

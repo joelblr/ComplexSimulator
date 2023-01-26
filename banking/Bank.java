@@ -6,14 +6,16 @@ import javax.security.auth.login.AccountNotFoundException;
 
 public interface Bank {
 
-	public static void createAccount(LinkedList<Bank> accList) {
-		
+	Scanner sc = new Scanner(System.in);
+
+	public static void createAccount(HashMap<String, Bank> accList) {
+	
 	}
-	public static void deleteAccount(LinkedList<Bank> accList) throws AccountNotFoundException {
-		
+	public static void deleteAccount(HashMap<String, Bank> accList) throws AccountNotFoundException {
+
 	}
-	public static void switchAccount(LinkedList<Bank> accList) throws AccountNotFoundException {
-		
+	public static Bank switchAccount(HashMap<String, Bank> accList) throws AccountNotFoundException {
+		return accList.get("bank");//just a return statement, dont worry much, it'll be overridden.
 	}
 
 
