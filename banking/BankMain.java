@@ -7,20 +7,14 @@ import banking.barodaBank.*;
 import java.util.*;
 public class BankMain extends SuperMain {
 
-	/* HashMap accounts = {
-				 "axis" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
-				 "idbi" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
-				 "canara" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
-				 "baroda" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
-				}
-	 */
+//Forget abt these lines..........
 //	public static HashMap<String, HashMap> accounts;
 //	public static Bank currentAcc;
-
 //	static {
 //		currentAcc = null;
 //		accounts = new HashMap<String, HashMap>();
 //	}
+
 
 	public static void setMenu() {
 		menuWidth = 13 + 11; title = "Banks of India";
