@@ -1,9 +1,31 @@
 package banking.axisBank;
 
 import banking.*;
-
 import java.util.*;
 public class AxisMain extends BankMain {
+
+	static AxisBank currentAxisAcc;
+	static HashMap<String, AxisBank> axisAccounts;
+
+	static {
+		currentAxisAcc = null;
+		axisAccounts = new HashMap<String, AxisBank>();
+	}
+
+
+	public static void setMenu() {
+		menuWidth = 20 + 11; title = "Axis Bank";
+		menu.clear();
+		menu.add("Quit Axis-Bank");
+		menu.add("Create an Account");
+		menu.add("Delete an Account");
+		menu.add("Switch an Account");
+		menu.add("Find Loan-Interest");
+		menu.add("Find Amount-Balance");
+		menu.add("Find Amount-Deposit");
+		menu.add("Find Amount-Withdraw");
+	}
+
 
 	public static void run() {
 		AxisRun();
@@ -12,8 +34,7 @@ public class AxisMain extends BankMain {
 
 	public static void AxisRun() {
 
-		currentAcc = null;
-		LinkedList<Bank> axisAcc = accounts.get("axis");
+		currentAxisAcc = null;
 		while (true) {
 
 			try {
@@ -29,31 +50,31 @@ public class AxisMain extends BankMain {
 				switch (getChoice) {
 
 					case 1 :
-						AxisBank.createAccount(axisAcc);
+						AxisBank.createAccount(axisAccounts);
 						break;
 	
 					case 2 :
-						AxisBank.deleteAccount(axisAcc);
+						AxisBank.deleteAccount(axisAccounts);
 						break;
 
 					case 3 :
-						AxisBank.switchAccount(axisAcc);
+						currentAxisAcc = AxisBank.switchAccount(axisAccounts);
 						break;
 
 					case 4 :
-						AxisBank.loanInterest(currentAcc);
+						AxisBank.loanInterest(currentAxisAcc);
 						break;
 
 					case 5 :
-						AxisBank.amountBalance(currentAcc);
+						AxisBank.amountBalance(currentAxisAcc);
 						break;
 	
 					case 6 :
-						AxisBank.amountDeposit(currentAcc);
+						AxisBank.amountDeposit(currentAxisAcc);
 						break;
 
 					case 7 :
-						AxisBank.amountWithdraw(currentAcc);
+						AxisBank.amountWithdraw(currentAxisAcc);
 						break;
 
 					case 0 :
