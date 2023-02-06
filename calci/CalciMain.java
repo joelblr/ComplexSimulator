@@ -1,17 +1,26 @@
 package calci;
 
+import design.Design;
 import main.SuperMain;
 import java.util.*;
+
+
 public class CalciMain extends SuperMain {
 
-	public static void setMenu() {
-		menuWidth = 27 + 11; title = "Casio fx-991+";
-		menu.clear();
-//		menu.add("Clear Screen");
-		//TODO : case1, case2
-		menu.add("Solve Linear Equation"); menu.add("Solve Quadratic Equation");
-		menu.add("Solve Boolean Expression"); menu.add("Solve Arithmetic Expression");
-		menu.add("Close Casio fx-707");
+
+	public static void showMenu() {
+		List<String> stdin = 
+				Design.printBox(
+					"Casio fx-991+", "",
+					" *1*  Solve Linear Equation",
+					" *2*  Solve Quadratic Equation",
+					" *3*  Solve Boolean Expression",
+					" *4*  Solve Arithmetic Expression",
+					" *0*  Close Casio fx-707", "",
+					"Enter Choice: $"
+				);
+
+		getChoice = Integer.parseInt(stdin.get(0).trim());
 	}
 
 
@@ -26,35 +35,33 @@ public class CalciMain extends SuperMain {
 
 			try {
 
-				clearScreen();
+				Design.clearScreen();
 				if (errorFlag) {
 					showErrorMessage(errorMsg);
 					errorFlag = false;
 				}
-				setMenu();	showMenu();
-				loadingProcess();
+				showMenu();
+				loadingProcess(1500);
 
 				switch (getChoice) {
 
 					case 1 :
-						errorMsg = "WORK-IN-PROGRESS, PLZ WAIT FOR A FEW WEEKS...";  errorFlag = true;
-						throw new Exception();
-						//Equations.LinearEqnRun();
-						//break;
+						Equations.LinearRun();
+						break;
 	
 					case 2 :
-						Equations.QuaticEqnRun();
+						Equations.QuadraticRun();
 						break;
 
 					case 3 :
-						BoolExp.run();
+						Expressions.booleanRun();
 						break;
 
 					case 4 :
-						ArithExp.run();
+						Expressions.arithmeticRun();
 						break;
 
-					case 5 :
+					case 0 :
 						return;
 
 					default :
@@ -65,16 +72,26 @@ public class CalciMain extends SuperMain {
 
 			//To catch Errors: Implement Verify.java inside Convertor.java
 			}catch (ArithmeticException e) {
-				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
-				e.printStackTrace();
+				loadingProcess(600);
+				errorMsg = "<DIVISION BY ZERO!>";	errorFlag = true;
 
-			}catch (InputMismatchException | NumberFormatException e) {
-				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
+			}catch (NumberFormatException e) {
+				loadingProcess(600);
+				errorMsg = "<INVALID INPUTs!>";	errorFlag = true;
+
+			}catch (InputMismatchException e) {
+				loadingProcess(600);
+				errorMsg = "<NOT A QUADRATIC!>";	errorFlag = true;
+
+			}catch(ArrayIndexOutOfBoundsException e) {
+				errorMsg = "<NOT ENOUGH INPUTS!>";	errorFlag = true;
 				e.printStackTrace();
+				scan.nextLine();
 
 			}catch(Exception e) {
 				errorMsg = "<HEY!>";	errorFlag = true;
 				e.printStackTrace();
+				scan.nextLine();
 
 			}
 
@@ -85,73 +102,3 @@ public class CalciMain extends SuperMain {
 
 
 
-
-//package calci;
-//
-//
-//import java.util.*;
-////import java.lang.Thread;
-//public class CalciMain {
-//
-//	public static final void clearScreen() {
-//		System.out.print("\033[H\033[2J");
-//		System.out.flush();
-//		try {
-//			final String os = System.getProperty("os.name");
-//			if (os.contains("Windows"))
-//				Runtime.getRuntime().exec("cls");
-//			else
-//				Runtime.getRuntime().exec("clear");
-//
-//		}catch (final Exception e) {
-//			System.out.println(e + " YO.....");
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public static void run() {
-//
-//		boolean flag = true;
-//		Scanner sc = new Scanner(System.in);
-//
-//		while (flag) {
-//
-//			try {
-//				clearScreen();
-//				System.out.println("*".repeat(50));
-//				System.out.println("1. Solve Arithmetic Expression\n2. Solve Boolean Expression\n3. Exit");
-//				System.out.println("*".repeat(50));
-//				System.out.print("Enter Choice: ");
-////				int choice = CalciMain.sc.nextInt();
-//				int choice = sc.nextInt();
-//
-//				switch (choice) {
-//
-//					case 1 :
-//						ArithExp.run();
-//						break;
-//
-//					case 2 :
-//						BoolExp.run();
-//						break;
-//
-//					case 3 :
-//						System.out.println("<".repeat(50));
-//						flag = false;
-//						break;
-//
-//					default :
-//						System.out.println("INVALID CHOICE!");
-//				}
-//				System.out.print("PRESS ENTER KEY TO CONTINUE...  ");
-//				sc.nextLine();
-//				sc.nextLine();
-//
-//			}catch (InputMismatchException e) {
-//				System.out.println("INVALID INPUT! ");
-////				sc.nextLine();
-//			}
-//		}
-//
-//	}
-//}

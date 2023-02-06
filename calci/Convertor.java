@@ -6,20 +6,26 @@ public class Convertor {
 
 
 	static char type;
-//	static String postfix[];
-	static ArrayList <String> postfix;
+	private static ArrayList <String> postfix;
+	//	static String postfix[];
 
-	public static LinkedHashMap <Character, Integer> unique;
 	public static Scanner sc;
+	private static HashSet<String> operators;
+	private static LinkedHashMap <Character, Integer> unique;
 
-	private static HashSet<String> operators = new HashSet<>();
 	static {
 		sc = new Scanner(System.in);
+
+		operators = new HashSet<>();
 		operators.add("+");operators.add("-");operators.add("*");operators.add("/");
 		operators.add("^");
 		operators.add("|");operators.add(".");operators.add("!");
 	}
 
+
+	public static LinkedHashMap<Character, Integer> getUnique() {
+		return unique;
+	}
 
 
 	private static int priority(char ch ) {
@@ -49,6 +55,7 @@ public class Convertor {
 
 //		int ptop = -1;
 //		postfix = new String[infix.length()];
+		//XXX: Use QUEUE
 		postfix = new ArrayList<>();
 
 		Stack <Character> stac = new Stack <>();
@@ -131,8 +138,14 @@ public class Convertor {
 			else
 				ans = Math.pow(x, y);
 
-		}else if (op.equals("/"))
-			ans = (y != 0.0) ? x/y : y;
+		}else if (op.equals("/")) {
+			if (y == 0.0) {
+				System.out.println();
+				throw new ArithmeticException();
+			}
+			ans = x/y;
+		}
+			
 
 		//System.out.println(x + " " + op + " " + y);
 		return ans;
