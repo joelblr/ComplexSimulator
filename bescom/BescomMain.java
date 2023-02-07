@@ -1,7 +1,8 @@
 package bescom;
 
-import java.util.InputMismatchException;
+import java.util.List;
 
+import design.Design;
 import main.SuperMain;
 public class BescomMain extends SuperMain {
 
@@ -9,18 +10,22 @@ public class BescomMain extends SuperMain {
 	public static Bescom EB = new Bescom();
 
 
-	public static void setMenu() {
-		menuWidth = 26 + 11; title = "BESCOM";
-		menu.clear();
-//		menu.add("Clear Screen");
-		menu.add("Enter Account Credentials");
-		menu.add("Enter Monthly-Unit Details");
-		menu.add("Update Unit Details");
-		menu.add("Print a Bill");
-		menu.add("Print All Bills");
-		menu.add("Close BESCOM");
-	}
+	public static void showMenu() {
 
+		List<String> stdin = 
+				Design.printBox(
+					"BESCOM", "",
+					" *1*  Enter Account Credentials",
+					" *2*  Enter Monthly-Unit Details",
+					" *3*  Update Unit Details",
+					" *4*  Print a Bill",
+					" *5*  Print All Bills",
+					" *0*  Close BESCOM", "",
+					"Enter Choice: $"
+				);
+
+		getChoice = Integer.parseInt(stdin.get(0).trim());
+	}
 
 	public static void run() {
 		BescomRun();
@@ -33,13 +38,13 @@ public class BescomMain extends SuperMain {
 
 			try {
 
-				clearScreen();
+				Design.clearScreen();
 				if (errorFlag) {
-					showErrorMessage(errorMsg);
+					Design.showErrorMessage(errorMsg);
 					errorFlag = false;
 				}
-				setMenu();	showMenu();
-				loadingProcess();
+				showMenu();
+				Design.loadingProcess(1500);
 
 				switch (getChoice) {
 
@@ -70,19 +75,20 @@ public class BescomMain extends SuperMain {
 						errorMsg = "<INVALID CHOICE!>";  errorFlag = true;
 						throw new NumberFormatException();
 
-				}continueProcess();
+				}Design.continueProcess();
 
 			}catch (ArithmeticException e) {
 				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
-//				e.printStackTrace();
 
-			}catch (InputMismatchException | NumberFormatException e) {
+			}catch (NumberFormatException e) {
+				Design.loadingProcess(600);
 				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
-//				e.printStackTrace();
 
 			}catch(Exception e) {
 				errorMsg = "<HEY!>";	errorFlag = true;
-//				e.printStackTrace();
+				e.printStackTrace();
+				Design.printBox("Pls Report this ErrorType to the Admin.");
+				scan.nextLine();
 
 			}
 
