@@ -2,7 +2,7 @@ package company;
 
 //import java.util.Scanner;
 //Make a super class (say Boss), which gives the % for salary calculation.
-public class Employee extends Boss {
+public class Employee {
 
 //	static Scanner sc = new Scanner(System.in);
 
@@ -19,22 +19,9 @@ public class Employee extends Boss {
 
 	void inputDetails() {
 
-		System.out.print("ENTER EMPLOYEE NAME*: ");
-		this.name = Bsc.nextLine();
-
-		System.out.print("ENTER EMPLOYEE GRADE: ");
-		this.type = Bsc.next().charAt(0);
-
-		System.out.print("ENTER EMPLOYEE ID*: ");
-		this.id = Bsc.next();
-		Bsc.nextLine();//remove for next
-
-//		System.out.print("ENTER EMPLOYEE AGE: ");
-//		this.age = sc.nextInt();
-//		System.out.print("ENTER EMPLOYEE GENDER(M/F): ");
-//		this.gender = sc.next().charAt(0);
-//		System.out.print("ENTER EMPLOYEE BASIC SALARY: ");
-//		this.basic = sce.nextDouble();
+		/*use Design.printBox(...);
+		 * to get inputs
+		 */
 	}
 
 	String getID() {
@@ -54,7 +41,7 @@ public class Employee extends Boss {
 	}
 
 	void calculateSalary() {
-		this.salary = getBasic() * (1 + Boss.getConst() ) + 5000;
+		this.salary = getBasic() * (1 + Constants.getConst() ) + 5000;
 	}
 
 }
