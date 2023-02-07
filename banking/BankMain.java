@@ -1,31 +1,38 @@
 package banking;
 
 import main.SuperMain;
+
+import java.util.List;
+
 import banking.axisBank.*;
 import banking.barodaBank.*;
+import design.Design;
 
-import java.util.*;
+//import java.util.*;
 public class BankMain extends SuperMain {
 
-//Forget abt these lines..........
-//	public static HashMap<String, HashMap> accounts;
-//	public static Bank currentAcc;
-//	static {
-//		currentAcc = null;
-//		accounts = new HashMap<String, HashMap>();
-//	}
+	/* HashMap accounts = {
+				 "axis" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
+				 "idbi" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
+				 "canara" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
+				 "baroda" : bankAccount1 -> bankAccount2 -> bankAccount3, -> ...
+				}
+	 */
 
 
-	public static void setMenu() {
-		menuWidth = 13 + 11; title = "Banks of India";
-		menu.clear();
-//		menu.add("Clear Screen");
-		menu.add("Close Banking");
-		menu.add("Axis Bank");
-		menu.add("IDBI Bank");
-		menu.add("Canara Bank");
-		menu.add("Baroda Bank");
-//		menu.add("Close Banking");
+	public static void showMenu() {
+		List<String> stdin = 
+				Design.printBox(
+						"Banks of India", "",
+						" *1*  Axis Bank",
+						" *2*  IDBI Bank",
+						" *3*  Canara Bank",
+						" *4*  Baroda Bank",
+						" *0*  Close Banking", "",
+						"Enter Choice: $"
+					);
+
+		getChoice = Integer.parseInt(stdin.get(0).trim());
 	}
 
 
@@ -40,13 +47,13 @@ public class BankMain extends SuperMain {
 
 			try {
 
-				clearScreen();
+				Design.clearScreen();
 				if (errorFlag) {
-					showErrorMessage(errorMsg);
+					Design.showErrorMessage(errorMsg);
 					errorFlag = false;
 				}
-				setMenu();	showMenu();
-				loadingProcess();
+				showMenu();
+				Design.loadingProcess(1500);
 
 				switch (getChoice) {
 
@@ -75,11 +82,15 @@ public class BankMain extends SuperMain {
 
 				}//continueProcess();
 
-			}catch (InputMismatchException | NumberFormatException e) {
+			}catch (NumberFormatException e) {
+				Design.loadingProcess(600);
 				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
 
 			}catch(Exception e) {
 				errorMsg = "<HEY!>";	errorFlag = true;
+				e.printStackTrace();
+				Design.printBox("Pls Report this ErrorType to the Admin.");
+				scan.nextLine();
 
 			}
 
