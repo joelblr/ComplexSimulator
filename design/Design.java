@@ -33,7 +33,7 @@ public class Design {
 
 
 	/**
-	 * Clears the Console of the Terminal
+	 * @Info Clears the Console of the Terminal
 	 */
 	public final static void clearScreen() {
 
@@ -44,6 +44,53 @@ public class Design {
 			System.out.print("\033[H\033[2J");
 		}
 	}
+	/**
+	 * @Info Displays the Error Message
+	 * @param msg : Appropriate Error message to print
+	 * */
+	public final static void showErrorMessage(String msg) {
+//		Design.printBox(new String(Character.toChars(0x2757))+" "+msg);
+		Design.printBox(msg);
+	}
+	/**
+	 * @Info Displays the Continue-Process Message
+	 * */
+	public final static void continueProcess() {
+		Design.printBox("PRESS <ENTER> KEY TO CONTINUE... $");
+	}
+	/**
+	 * @Info Displays the waiting Process
+	 * @param time  number of milli seconds
+	 * */
+	public final static void loadingProcess(int time) {
+
+		String a = "|/-\\";
+		long start = System.currentTimeMillis();
+		try {
+			int i = 0;
+			Design.printBox("Loading your Choice   ");
+			System.out.print("\033[2A\033["+(8+4+21)+"C");
+			while (true) {
+				
+				System.out.print(a.charAt(i) + " ");
+				Thread.sleep(150);
+				System.out.print("\b\b");
+				long now = System.currentTimeMillis();
+				if (now - start >= time) break;
+				i = (i+1) % 4;
+			}
+
+		}catch(Exception e) {}
+		finally {
+			System.out.print("\033[1B");
+			for (int i = 0; i < 3; i++) {
+				System.out.print("\033[2K");
+				System.out.print("\033[1A");
+			}
+		}
+		System.out.println();
+	}
+
 
 
 	private static int findMaxWidth(String ... str) {
@@ -112,7 +159,24 @@ public class Design {
 
 		return stdin;
 	}
-
+	/**
+	 * @Info Prints the Input Message in a Box Format
+	 * @param   msg   ->  Messages
+	 * @usage 	give a set of Strings as parameters.
+	 * 			* If a line-break is needed after a line then
+	 * give an empty String "" as the next String.
+	 * 			* If some input has to be taken at some line
+	 * then at the end of that line, add " $" (space dollar).
+	 * @example Design.printBox(
+						"Line1", "",
+						"Line2",
+						"Line3", "",
+						"Line4 $",
+						"Line5 $",
+						"Line6", "",
+						"Enter Choice: $"
+					);
+	 */
 	public static List<String> printBox(String ... msg) {
 
 		List<Integer[]> cursorEof = new LinkedList<Integer[]>();
