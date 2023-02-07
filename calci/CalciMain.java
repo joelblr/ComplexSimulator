@@ -37,11 +37,11 @@ public class CalciMain extends SuperMain {
 
 				Design.clearScreen();
 				if (errorFlag) {
-					showErrorMessage(errorMsg);
+					Design.showErrorMessage(errorMsg);
 					errorFlag = false;
 				}
 				showMenu();
-				loadingProcess(1500);
+				Design.loadingProcess(1500);
 
 				switch (getChoice) {
 
@@ -67,20 +67,20 @@ public class CalciMain extends SuperMain {
 					default :
 						errorMsg = "<INVALID CHOICE!>";  errorFlag = true;
 						throw new NumberFormatException();
-				}
-				continueProcess();
+
+				}Design.continueProcess();
 
 			//To catch Errors: Implement Verify.java inside Convertor.java
 			}catch (ArithmeticException e) {
-				loadingProcess(600);
+				Design.loadingProcess(600);
 				errorMsg = "<DIVISION BY ZERO!>";	errorFlag = true;
 
 			}catch (NumberFormatException e) {
-				loadingProcess(600);
+				Design.loadingProcess(600);
 				errorMsg = "<INVALID INPUTs!>";	errorFlag = true;
 
 			}catch (InputMismatchException e) {
-				loadingProcess(600);
+				Design.loadingProcess(600);
 				errorMsg = "<NOT A QUADRATIC!>";	errorFlag = true;
 
 			}catch(ArrayIndexOutOfBoundsException e) {
