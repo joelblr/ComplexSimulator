@@ -1,15 +1,12 @@
 package banking.axisBank;
 
 import banking.*;
+import design.Design;
+
 import java.util.*;
 public class AxisMain extends BankMain {
 
-	//to keep track of present user.
 	static AxisBank currentAxisAcc;
-
-	/*key : value pairs,
-		"accpunt name" : AxisBank instance
-	*/
 	static HashMap<String, AxisBank> axisAccounts;
 
 	static {
@@ -18,17 +15,23 @@ public class AxisMain extends BankMain {
 	}
 
 
-	public static void setMenu() {
-		menuWidth = 20 + 11; title = "Axis Bank";
-		menu.clear();
-		menu.add("Quit Axis-Bank");
-		menu.add("Create an Account");
-		menu.add("Delete an Account");
-		menu.add("Switch an Account");
-		menu.add("Find Loan-Interest");
-		menu.add("Find Amount-Balance");
-		menu.add("Find Amount-Deposit");
-		menu.add("Find Amount-Withdraw");
+	public static void showMenu() {
+
+		List<String> stdin = 
+				Design.printBox(
+					"Axis Bank", "",
+					" *1*  Create an Account",
+					" *2*  Delete an Account",
+					" *3*  Switch an Account", "",
+					" *4*  Find Loan-Interest",
+					" *5*  Find Amount-Balance",
+					" *6*  Find Amount-Deposit",
+					" *7*  Find Amount-Withdraw", "",
+					" *0*  Quit Axis-Bank", "",
+					"Enter Choice: $"
+				);
+
+		getChoice = Integer.parseInt(stdin.get(0).trim());
 	}
 
 
@@ -44,13 +47,13 @@ public class AxisMain extends BankMain {
 
 			try {
 
-				clearScreen();
+				Design.clearScreen();
 				if (errorFlag) {
-					showErrorMessage(errorMsg);
+					Design.showErrorMessage(errorMsg);
 					errorFlag = false;
 				}
-				setMenu();	showMenu();
-				loadingProcess();
+				showMenu();
+				Design.loadingProcess(1500);
 
 				switch (getChoice) {
 
@@ -89,9 +92,10 @@ public class AxisMain extends BankMain {
 						errorMsg = "<INVALID CHOICE!>";  errorFlag = true;
 						throw new NumberFormatException();
 
-				}continueProcess();
+				}Design.continueProcess();
 
-			}catch (InputMismatchException | NumberFormatException e) {
+			}catch (NumberFormatException e) {
+				Design.loadingProcess(600);
 				errorMsg = "<INVALID INPUT!>";	errorFlag = true;
 
 			}catch (IllegalAccessException e) {
@@ -102,9 +106,14 @@ public class AxisMain extends BankMain {
 
 			}catch(Exception e) {
 				errorMsg = "<HEY!>";	errorFlag = true;
+				e.printStackTrace();
+				Design.printBox("Pls Report this ErrorType to the Admin.");
+				scan.nextLine();
 
 			}
 
 		}
 	}
 }
+
+
