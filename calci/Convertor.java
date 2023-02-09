@@ -19,7 +19,7 @@ public class Convertor {
 		operators = new HashSet<>();
 		operators.add("+");operators.add("-");operators.add("*");operators.add("/");
 		operators.add("^");
-		operators.add("|");operators.add(".");operators.add("!");
+		operators.add("|");operators.add(".");operators.add("&");operators.add("!");
 	}
 
 
@@ -38,7 +38,7 @@ public class Convertor {
 			return 3;
 		else if (ch == '^')
 			return 4;
-		else if (ch == '.')
+		else if (ch == '.' || ch == '&')
 			return 5;
 		else if (ch == '!')
 			return 6;
@@ -47,6 +47,9 @@ public class Convertor {
 
 
 	public static void findPostfix(String infix, char T) {
+
+		infix = infix.replace("[", "(").replace("{", "(");
+		infix = infix.replace("]", ")").replace("}", ")");
 
 		type = T;
 		int k = 0;
@@ -126,7 +129,7 @@ public class Convertor {
 			else
 				ans = x+y;
 
-		}else if (op.equals(".") || op.equals("*")) {
+		}else if (op.equals(".") || op.equals("&") || op.equals("*")) {
 			if (type == 'B')
 				ans = (int)x & (int)y;
 			else

@@ -8,10 +8,12 @@ public class Expressions extends Convertor {
 
 	private static void getExpression(String type) {
 
+		String sample = (type == "BOOLEAN") ? "A + B.C + !d^e | f&g and assume !A = a" : "(1+2)/3 * 4 + 5";
 		List<String> stdin = 
 				Design.printBox(
 						"ENTER " + type + " EXPRESSION: $",
-						" ".repeat(55)
+						" ",
+						"Sample: " + sample + " ".repeat(50-sample.length())
 					);
 
 		String infix = "(" + stdin.get(0) + ")";
