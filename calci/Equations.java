@@ -31,7 +31,7 @@ public class Equations {
 
 		String[] coeff = stdin.get(0).split(" ");
 
-		if (coeff.length > 3)
+		if (coeff.length != 3)
 			throw new NumberFormatException();
 
 		a = Double.parseDouble(coeff[0]);
