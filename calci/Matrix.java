@@ -15,7 +15,6 @@ public class Matrix {
 	double U[], V[][];	String W[];
 
 
-
 	public void getMatirx() {
 
 		List<String> stdin = 
@@ -23,15 +22,25 @@ public class Matrix {
 						"ENTER NUMBER OF UNKNOWNS: $",
 						"ENTER NUMBER OF LINEAR EQUATIONS: $"
 					);
-
 		cols = Integer.parseInt(stdin.get(0).trim()) + 1;
 		rows = Integer.parseInt(stdin.get(1).trim());
 
-		String[] lines = new String[rows+2];
-		lines[0] = "ENTER VALUES OF "+cols+" COEFFs OF "+rows+" LINEAR EQUATIONS";
-		lines[1] = "";
+		String[] lines = new String[rows+4];
+		lines[0] = "CONSIDER: ";
+		String L0 = "", L1 = "";
+		for (int i = 1; i < cols; i++) {
+			String alpha = String.valueOf((char)(64+i));
+			L0 += alpha + "x" + i + " ";
+			L1 += alpha + " ";
+		}
+		L0 = Design.joinWith(" + ", L0.split(" ")) + " = y"; L1 += "y";
+		lines[0] += L0;
+		lines[2] = Design.joinWith(" ", L1.split(" "));
+
+		lines[1] = "ENTER VALUES OF "+cols+" COEFFs OF "+rows+" LINEAR EQUATIONS";
+		lines[3] = "";
 		for (int i = 1; i <= rows; i++)
-			lines[i+1] = "Line "+i+": $";
+			lines[i+3] = "Line "+i+": $";
 
 		stdin = Design.printBox(lines);
 
@@ -39,6 +48,8 @@ public class Matrix {
 
 		for (int i = 0; i < rows; i++) {
 			String[] lineI = stdin.get(i).split(" ");
+			if (lineI.length != cols)
+				throw new NumberFormatException();
 			for (int j = 0; j < cols; j++)
 				A[i][j] = Double.parseDouble(lineI[j]);
 		}
