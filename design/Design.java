@@ -31,6 +31,14 @@ public class Design {
 	}
 
 
+	/** """Equivalent of str.join(list) in python3."""
+	 * Join a collection of strings and add a delimiter.
+	 * @require elements.size() > 0 && elements != null
+	 */
+	public static String joinWith(String delimiter, String ... elements) {
+		return String.join(delimiter, elements);
+	}
+
 
 	/**
 	 * @Info Clears the Console of the Terminal
